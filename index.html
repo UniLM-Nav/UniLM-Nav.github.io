@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="UniLM-Nav project page.">
+  <title>UniLM-Nav</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #202124;
+      --muted: #5f6368;
+      --line: #dadce0;
+      --accent: #1a73e8;
+      --accent-dark: #1558b0;
+      --soft: #f8fafd;
+      --soft-2: #eef4ff;
+      --code-bg: #f5f7fb;
+      --max-width: 980px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .navbar {
+      min-height: 52px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.98);
+    }
+
+    .navbar-inner {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+      min-height: 52px;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .navbar-item,
+    .navbar-link {
+      min-height: 52px;
+      padding: 0 14px;
+      color: var(--ink);
+      border: 0;
+      background: transparent;
+      font: inherit;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .navbar-item:hover,
+    .navbar-link:hover {
+      background: #f5f7fb;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .navbar-home {
+      font-weight: 650;
+    }
+
+    .navbar-dropdown-wrap {
+      position: relative;
+      display: inline-flex;
+    }
+
+    .navbar-link::after {
+      content: "";
+      width: 7px;
+      height: 7px;
+      margin-left: 9px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+    }
+
+    .navbar-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 190px;
+      padding: 8px 0;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: 0 10px 28px rgba(32, 33, 36, 0.14);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 140ms ease, transform 140ms ease, visibility 140ms ease;
+      z-index: 20;
+    }
+
+    .navbar-dropdown-wrap:hover .navbar-dropdown,
+    .navbar-dropdown-wrap:focus-within .navbar-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .navbar-dropdown a {
+      width: 100%;
+      min-height: 38px;
+      padding: 7px 16px;
+      color: var(--ink);
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-dropdown a:hover {
+      background: #f5f7fb;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    main {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 46px 0 30px;
+      text-align: center;
+    }
+
+    h1 {
+      max-width: 920px;
+      margin: 0 auto 14px;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.08;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .venue {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 22px;
+      font-weight: 650;
+    }
+
+    .authors,
+    .affiliations {
+      margin: 0 auto 10px;
+      max-width: 860px;
+      font-size: 18px;
+    }
+
+    .affiliations {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .author-block {
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .resource-links {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .resource-button {
+      min-width: 116px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #ffffff;
+      padding: 9px 16px;
+      font-weight: 700;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid var(--ink);
+    }
+
+    .resource-button:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .tldr {
+      margin: 24px auto 0;
+      max-width: 900px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      text-align: left;
+      font-size: 17px;
+    }
+
+    section {
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 30px;
+      line-height: 1.2;
+      text-align: center;
+      letter-spacing: 0;
+    }
+
+    .figure {
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .figure img {
+      width: 100%;
+      max-height: 620px;
+      object-fit: contain;
+      display: block;
+      border: 1px solid var(--line);
+      background: var(--soft);
+    }
+
+    .placeholder {
+      min-height: 280px;
+      border: 1px dashed #a7b6cc;
+      background: linear-gradient(135deg, #f8fafd 0%, #eef4ff 100%);
+      color: #56657a;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 28px;
+      font-size: 17px;
+    }
+
+    .caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .abstract {
+      max-width: 920px;
+      margin: 0 auto;
+      text-align: justify;
+      font-size: 18px;
+    }
+
+    pre {
+      margin: 0;
+      padding: 18px;
+      overflow-x: auto;
+      background: var(--code-bg);
+      border: 1px solid var(--line);
+      font-size: 14px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0 42px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 640px) {
+      .navbar-inner {
+        justify-content: flex-start;
+      }
+
+      .navbar-dropdown {
+        left: auto;
+        right: 0;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .venue {
+        font-size: 19px;
+      }
+
+      .authors {
+        font-size: 16px;
+      }
+
+      .resource-button {
+        min-width: 100px;
+      }
+
+      h2 {
+        font-size: 26px;
+      }
+
+      .abstract {
+        text-align: left;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-inner">
+      <nav class="navbar-dropdown-wrap" aria-label="More research">
+        <button class="navbar-link" type="button" aria-haspopup="true">More Research</button>
+        <div class="navbar-dropdown">
+          <!-- Edit this block to change the top More Research dropdown links. -->
+          <!--a href="https://sqa3d.github.io/">SQA3D</a-->
+          <!--a href="https://3d-vista.github.io/">3D-VisTA</a-->
+          <!--a href="https://pq3d.github.io/">PQ3D</a-->
+          <!--a href="https://embodied-generalist.github.io/">LEO</a-->
+          <!--a href="https://scene-verse.github.io/">SceneVerse</a-->
+          <a href="https://sg-3d.github.io/">SG3D</a>
+          <a href="https://anywhere-3d.github.io/">Anywhere3D</a>
+          <a href="https://mtu3d.github.io/">MTU3D</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="paper-title">
+      <h1 id="paper-title">UniLM-Nav:  A Unified Framework for Zero-Shot Last-Mile Navigation</h1>
+      <!--p class="venue">Under Review</p-->
+
+      <div class="authors publication-authors">
+        <span class="author-block">
+          <a target="_blank" href="https://github.com/zfzhang-thu">Zhuofan Zhang</a><sup>1,2</sup>,</span>
+        <span class="author-block">
+          <a target="_blank" href="https://github.com/TXWang98">Tianxu Wang</a><sup>1</sup>,</span>
+        <span class="author-block">
+          <a target="_blank" href="https://guoxizhang.com/">Guoxi Zhang</a><sup>1</sup>,</span>
+        <span class="author-block">
+          <a target="_blank" href="https://github.com/yixionglin068">Yixiong Lin</a><sup>1</sup>,</span>
+        <span class="author-block">
+          <a target="_blank" href="https://github.com/wang-xilin">Xilin Wang</a><sup>1</sup>,</span>
+        <span class="author-block">
+          <a target="_blank" href="#">Hongming Xu</a><sup>1</sup>,</span>
+        <span class="author-block">
+          <a target="_blank" href="https://liqing.io/">Qing Li</a><sup>1</sup>,</span>
+        <span class="author-block">
+          <a target="_blank" href="https://zhusongchun.net/">Songchun Zhu</a><sup>1,2,3</sup>,</span>
+        <span class="author-block">
+          <a target="_blank" href="https://lifengfan.github.io/">Lifeng Fan</a><sup>1</sup>,</span>
+      </div>
+
+      <div class="affiliations publication-authors">
+        <span class="author-block"><sup>1</sup>Beijing Institute for General Artificial Intelligence</span>
+        <span class="author-block"><sup>2</sup>Tsinghua University</span>
+        <span class="author-block"><sup>3</sup>Peking University</span>
+      </div>
+
+      <div class="resource-links" aria-label="Project resources">
+        <a class="resource-button" href="#" aria-disabled="true">Paper</a>
+        <a class="resource-button" href="#" aria-disabled="true">Video</a>
+        <a class="resource-button" href="#" aria-disabled="true">Code</a>
+      </div>
+
+      <p class="tldr">
+        <strong>TL;DR</strong>
+          UniLM-Nav is a zero-shot MLLM framework that bridges object navigation and manipulation by selecting task-relevant views, grounding affordances, and reasoning about manipulation-ready base poses for open-vocabulary mobile manipulation.
+      </p>
+    </section>
+
+    <section id="teaser" aria-labelledby="teaser-title">
+      <h2 id="teaser-title">Teaser</h2>
+      <figure class="figure">
+        <!-- Put your teaser image at assets/teaser.png, or update the src below. -->
+        <img src="assets/teaser_v4.png" alt="UniLM-Nav teaser figure" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+        <!--div class="placeholder" style="display: none;">
+          Teaser image placeholder<br>
+          Replace <code>assets/teaser.png</code> with your teaser figure.
+        </div-->
+        <!--figcaption class="caption">A short caption for the teaser figure can go here.</figcaption-->
+      </figure>
+    </section>
+
+    <section id="abstract" aria-labelledby="abstract-title">
+      <h2 id="abstract-title">Abstract</h2>
+      <p class="abstract">
+        Mobile manipulation requires a robot to navigate to a target object or receptacle and then perform intended manipulation. However, reaching the vicinity of the target does not guarantee a manipulation-ready base pose, a problem known as last-mile navigation. Prior methods for last-mile navigation either rely on manual pose annotation or task-specific training, limiting their scalability to open-vocabulary settings with fine-grained spatial constraints. We propose UniLM-Nav, a unified framework for zero-shot open-vocabulary last-mile navigation. UniLM-Nav decomposes last-mile navigation into view selection, task-conditioned affordance grounding, and geometry-aware base-pose reasoning, all resolved with a shared multimodal large language model (MLLM) backend. Specifically, UniLM-Nav first selects a reference view that best captures the target object or receptacle from recently collected observations. It then grounds task-relevant affordance point in the selected view and lifts the result into the robot-centric coordinate frame. Finally, conditioned on the grounded affordance, task context, and robot geometry, it infers a manipulation-ready base pose for the robot. We evaluate UniLM-Nav on the OVMM benchmark where it outperforms the previous state-of-the-art method, MoTo, by 3.13 percentage points. Analyses show that the components of our method are crucial to final performance, and that the choice of MLLM also has a substantial effect. We further deploy UniLM-Nav on a Unitree B2 quadruped robot with a 6-DoF Unitree Z1 manipulator, validating its applicability to real-world mobile manipulation tasks.
+      </p>
+    </section>
+
+    <section id="method" aria-labelledby="method-title">
+      <h2 id="method-title">Method</h2>
+      <figure class="figure">
+        <!-- Put your method image at assets/method.png, or update the src below. -->
+        <img src="assets/method_teaser_final.png" alt="UniLM-Nav method overview" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+        <!--div class="placeholder" style="display: none;">
+          Method figure placeholder<br>
+          Replace <code>assets/method.png</code> with your method overview figure.
+        </div-->
+        <!--figcaption class="caption">A concise description of the UniLM-Nav method overview can go here.</figcaption-->
+      </figure>
+    </section>
+
+    <!--section id="bibtex" aria-labelledby="bibtex-title">
+      <h2 id="bibtex-title">BibTeX</h2>
+      <pre><code>@article{unilmnav2026,
+  title   = {UniLM-Nav: Paper Title Placeholder},
+  author  = {Author One and Author Two and Author Three},
+  journal = {Under Review},
+  year    = {2026}
+}</code></pre>
+    </section-->
+  </main>
+
+  <footer>
+    Website template inspired by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+  </footer>
+</body>
+</html>
