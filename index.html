@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="UniLM-Nav project page.">
   <title>UniLM-Nav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;750&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <style>
     :root {
       --bg: #ffffff;
@@ -17,6 +21,7 @@
       --soft-2: #eef4ff;
       --code-bg: #f5f7fb;
       --max-width: 980px;
+      --content-width: 900px;
     }
 
     * {
@@ -27,7 +32,7 @@
       margin: 0;
       background: var(--bg);
       color: var(--ink);
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       line-height: 1.65;
     }
 
@@ -42,7 +47,6 @@
 
     .navbar {
       min-height: 52px;
-      border-bottom: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.98);
     }
 
@@ -96,6 +100,17 @@
       transform: rotate(45deg) translateY(-2px);
     }
 
+    .navbar-icon {
+      width: 17px;
+      height: 17px;
+      margin-right: 7px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .navbar-dropdown {
       position: absolute;
       top: 100%;
@@ -124,7 +139,7 @@
       min-height: 38px;
       padding: 7px 16px;
       color: var(--ink);
-      font-size: 15px;
+      font-size: 14px;
       display: flex;
       align-items: center;
     }
@@ -143,15 +158,38 @@
     .hero {
       padding: 46px 0 30px;
       text-align: center;
+      border-top: 0;
     }
 
     h1 {
-      max-width: 920px;
+      max-width: var(--content-width);
       margin: 0 auto 14px;
-      font-size: clamp(32px, 5vw, 54px);
-      line-height: 1.08;
-      font-weight: 750;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.46;
+      font-weight: 600;
       letter-spacing: 0;
+    }
+
+    .paper-title-row {
+      max-width: var(--content-width);
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .paper-title-row h1 {
+      margin: 0;
+      max-width: none;
+      text-align: center;
+    }
+
+    .paper-title-logo {
+      width: 143px;
+      height: 143px;
+      object-fit: contain;
+      flex: 0 0 auto;
     }
 
     .venue {
@@ -165,7 +203,7 @@
     .affiliations {
       margin: 0 auto 10px;
       max-width: 860px;
-      font-size: 18px;
+      font-size: 16px;
     }
 
     .affiliations {
@@ -173,9 +211,20 @@
       font-size: 16px;
     }
 
+    .author-notes {
+      font-size: 14px;
+    }
+
     .author-block {
       display: inline-block;
       margin-right: 4px;
+    }
+
+    .author-note {
+      font-size: 0.8em;
+      position: relative;
+      top: -0.2em;
+      margin-left: 1px;
     }
 
     .resource-links {
@@ -208,17 +257,46 @@
       text-decoration: none;
     }
 
+    .resource-icon {
+      width: 18px;
+      height: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: currentColor;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .resource-icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .resource-icon .ai {
+      font-size: 18px;
+      line-height: 1;
+    }
+
     .tldr {
       margin: 24px auto 0;
-      max-width: 900px;
+      max-width: var(--content-width);
       padding: 16px 18px;
       border-left: 4px solid var(--accent);
       background: var(--soft);
       text-align: left;
-      font-size: 17px;
+      font-size: 14px;
     }
 
     section {
+      width: min(100%, var(--content-width));
+      margin: 0 auto;
       padding: 28px 0;
       border-top: 1px solid var(--line);
     }
@@ -233,7 +311,11 @@
 
     .figure {
       margin: 0 auto;
-      width: 100%;
+      width: min(100%, var(--content-width));
+    }
+
+    .abstract-figure {
+      margin-top: 24px;
     }
 
     .figure img {
@@ -241,8 +323,35 @@
       max-height: 620px;
       object-fit: contain;
       display: block;
-      border: 1px solid var(--line);
       background: var(--soft);
+    }
+
+    .video-embed {
+      position: relative;
+      width: min(100%, var(--content-width));
+      margin: 0 auto;
+      aspect-ratio: 16 / 9;
+      background: transparent;
+      border-radius: 16px;
+      box-shadow: 0 14px 34px rgba(32, 33, 36, 0.14);
+      overflow: hidden;
+      transition: box-shadow 220ms ease;
+    }
+
+    .hero-video {
+      margin-top: 26px;
+    }
+
+    .video-embed:hover {
+      box-shadow: 0 18px 42px rgba(32, 33, 36, 0.18);
+    }
+
+    .video-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     .placeholder {
@@ -265,10 +374,14 @@
     }
 
     .abstract {
-      max-width: 920px;
+      max-width: var(--content-width);
       margin: 0 auto;
       text-align: justify;
-      font-size: 18px;
+      font-size: 13px;
+    }
+
+    .abstract + .abstract {
+      margin-top: 12px;
     }
 
     pre {
@@ -282,6 +395,21 @@
       white-space: pre-wrap;
     }
 
+    #bibtex {
+      border-top: 0;
+    }
+
+    #bibtex h2 {
+      text-align: left;
+      font-size: 24px;
+    }
+
+    #bibtex pre {
+      background: #f6f6f6;
+      border: 0;
+      white-space: pre;
+    }
+
     footer {
       width: min(var(--max-width), calc(100% - 32px));
       margin: 0 auto;
@@ -289,7 +417,6 @@
       color: var(--muted);
       font-size: 14px;
       text-align: center;
-      border-top: 1px solid var(--line);
     }
 
     @media (max-width: 640px) {
@@ -304,6 +431,20 @@
 
       .hero {
         padding-top: 34px;
+      }
+
+      .paper-title-row {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .paper-title-row h1 {
+        text-align: center;
+      }
+
+      .paper-title-logo {
+        width: 108px;
+        height: 108px;
       }
 
       .venue {
@@ -333,17 +474,24 @@
   <header class="navbar">
     <div class="navbar-inner">
       <nav class="navbar-dropdown-wrap" aria-label="More research">
-        <button class="navbar-link" type="button" aria-haspopup="true">More Research</button>
+        <button class="navbar-link" type="button" aria-haspopup="true">
+          <svg class="navbar-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5"></path>
+            <path d="M5 9.5V21h14V9.5"></path>
+            <path d="M9.5 21v-6h5v6"></path>
+          </svg>
+          More Research
+        </button>
         <div class="navbar-dropdown">
           <!-- Edit this block to change the top More Research dropdown links. -->
           <!--a href="https://sqa3d.github.io/">SQA3D</a-->
           <!--a href="https://3d-vista.github.io/">3D-VisTA</a-->
-          <!--a href="https://pq3d.github.io/">PQ3D</a-->
           <!--a href="https://embodied-generalist.github.io/">LEO</a-->
           <!--a href="https://scene-verse.github.io/">SceneVerse</a-->
-          <a href="https://sg-3d.github.io/">SG3D</a>
           <a href="https://anywhere-3d.github.io/">Anywhere3D</a>
           <a href="https://mtu3d.github.io/">MTU3D</a>
+          <a href="https://sg-3d.github.io/">SG3D</a>
+          <a href="https://pq3d.github.io/">PQ3D</a>
         </div>
       </nav>
     </div>
@@ -351,51 +499,94 @@
 
   <main>
     <section class="hero" aria-labelledby="paper-title">
-      <h1 id="paper-title">UniLM-Nav:  A Unified Framework for Zero-Shot Last-Mile Navigation</h1>
+      <div class="paper-title-row">
+        <img class="paper-title-logo" src="assets/UniLM-Nav_logo.png" alt="UniLM-Nav logo">
+        <h1 id="paper-title">UniLM-Nav:  A Unified Framework for Zero-Shot Last-Mile Navigation</h1>
+      </div>
       <!--p class="venue">Under Review</p-->
 
       <div class="authors publication-authors">
         <span class="author-block">
-          <a target="_blank" href="https://github.com/zfzhang-thu">Zhuofan Zhang</a><sup>1,2</sup>,</span>
+          <a target="_blank" href="https://github.com/zfzhang-thu">Zhuofan Zhang</a><sup>1,2</sup><sup class="author-note">*</sup>,</span>
         <span class="author-block">
-          <a target="_blank" href="https://github.com/TXWang98">Tianxu Wang</a><sup>1</sup>,</span>
+          <a target="_blank" href="https://github.com/TXWang98">Tianxu Wang</a><sup>2</sup><sup class="author-note">*</sup>,</span>
         <span class="author-block">
-          <a target="_blank" href="https://guoxizhang.com/">Guoxi Zhang</a><sup>1</sup>,</span>
+          <a target="_blank" href="https://guoxizhang.com/">Guoxi Zhang</a><sup>2</sup>,</span>
         <span class="author-block">
-          <a target="_blank" href="https://github.com/yixionglin068">Yixiong Lin</a><sup>1</sup>,</span>
+          <a target="_blank" href="https://github.com/yixionglin068">Yixiong Lin</a><sup>2,3</sup>,</span>
         <span class="author-block">
-          <a target="_blank" href="https://github.com/wang-xilin">Xilin Wang</a><sup>1</sup>,</span>
+          <a target="_blank" href="https://github.com/wang-xilin">Xilin Wang</a><sup>2</sup>,</span>
         <span class="author-block">
-          <a target="_blank" href="#">Hongming Xu</a><sup>1</sup>,</span>
+          <a target="_blank" href="#">Hongming Xu</a><sup>2</sup>,</span>
         <span class="author-block">
-          <a target="_blank" href="https://liqing.io/">Qing Li</a><sup>1</sup>,</span>
+          <a target="_blank" href="https://liqing.io/">Qing Li</a><sup>2</sup>,</span>
         <span class="author-block">
-          <a target="_blank" href="https://zhusongchun.net/">Songchun Zhu</a><sup>1,2,3</sup>,</span>
+          <a target="_blank" href="https://zhusongchun.net/">Song-Chun Zhu</a><sup>1,2,4</sup>,</span>
         <span class="author-block">
-          <a target="_blank" href="https://lifengfan.github.io/">Lifeng Fan</a><sup>1</sup>,</span>
+          <a target="_blank" href="https://lifengfan.github.io/">Lifeng Fan</a><sup>2</sup><sup class="author-note">&dagger;</sup>,</span>
+      </div>
+
+      <div class="affiliations publication-authors author-notes">
+        <span class="author-block"><sup>*</sup>Equal contribution</span>
+        <span class="author-block"><sup>&dagger;</sup>Corresponding author</span>
       </div>
 
       <div class="affiliations publication-authors">
-        <span class="author-block"><sup>1</sup>Beijing Institute for General Artificial Intelligence</span>
-        <span class="author-block"><sup>2</sup>Tsinghua University</span>
-        <span class="author-block"><sup>3</sup>Peking University</span>
+        <span class="author-block"><sup>1</sup>Tsinghua University</span>
+        <span class="author-block"><sup>2</sup>BIGAI</span>
+        <span class="author-block"><sup>3</sup>Harbin Institute of Technology</span>
+        <span class="author-block"><sup>4</sup>Peking University</span>
       </div>
 
       <div class="resource-links" aria-label="Project resources">
-        <a class="resource-button" href="#" aria-disabled="true">Paper</a>
-        <a class="resource-button" href="#" aria-disabled="true">Video</a>
-        <a class="resource-button" href="#" aria-disabled="true">Code</a>
+        <a class="resource-button" href="https://arxiv.org/abs/2607.06537" target="_blank" rel="noopener">
+          <span class="resource-icon" aria-hidden="true">
+            <i class="ai ai-arxiv"></i>
+          </span>
+          arXiv
+        </a>
+        <a class="resource-button" href="https://youtu.be/uLALblO5p1k" target="_blank" rel="noopener">
+          <span class="resource-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="m10 8 6 4-6 4z"></path>
+            </svg>
+          </span>
+          Video
+        </a>
+        <a class="resource-button" href="#" aria-disabled="true">
+          <span class="resource-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="m8 9-4 3 4 3"></path>
+              <path d="m16 9 4 3-4 3"></path>
+              <path d="m14 5-4 14"></path>
+            </svg>
+          </span>
+          Code
+        </a>
       </div>
 
       <p class="tldr">
-        <strong>TL;DR</strong>
+        <strong>TL;DR:</strong>
           UniLM-Nav is a zero-shot MLLM framework that bridges object navigation and manipulation by selecting task-relevant views, grounding affordances, and reasoning about manipulation-ready base poses for open-vocabulary mobile manipulation.
       </p>
+      <div class="video-embed hero-video" id="video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/uLALblO5p1k?si=OUpwQTOLTeneCfWX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
     </section>
 
-    <section id="teaser" aria-labelledby="teaser-title">
-      <h2 id="teaser-title">Teaser</h2>
-      <figure class="figure">
+    <section id="abstract" aria-labelledby="abstract-title">
+      <h2 id="abstract-title">Abstract</h2>
+      <p class="abstract">
+        Mobile manipulation requires a robot to navigate to a target object or receptacle and then perform intended manipulation. However, reaching the vicinity of the target does not guarantee a manipulation-ready base pose, a problem known as last-mile navigation. Prior methods for last-mile navigation either rely on manual pose annotation or task-specific training, limiting their scalability to open-vocabulary settings with fine-grained spatial constraints.
+      </p>
+      <p class="abstract">
+        We propose UniLM-Nav, a unified framework for zero-shot open-vocabulary last-mile navigation. UniLM-Nav decomposes last-mile navigation into view selection, task-conditioned affordance grounding, and geometry-aware base-pose reasoning, all resolved with a shared multimodal large language model (MLLM) backend. Specifically, UniLM-Nav first selects a reference view that best captures the target object or receptacle from recently collected observations. It then grounds task-relevant affordance point in the selected view and lifts the result into the robot-centric coordinate frame. Finally, conditioned on the grounded affordance, task context, and robot geometry, it infers a manipulation-ready base pose for the robot.
+      </p>
+      <p class="abstract">
+        We evaluate UniLM-Nav on the OVMM benchmark where it outperforms the previous state-of-the-art method, MoTo, by 3.13 percentage points. Analyses show that the components of our method are crucial to final performance, and that the choice of MLLM also has a substantial effect. We further deploy UniLM-Nav on a Unitree B2 quadruped robot with a 6-DoF Unitree Z1 manipulator, validating its applicability to real-world mobile manipulation tasks.
+      </p>
+      <figure class="figure abstract-figure">
         <!-- Put your teaser image at assets/teaser.png, or update the src below. -->
         <img src="assets/teaser_v4.png" alt="UniLM-Nav teaser figure" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
         <!--div class="placeholder" style="display: none;">
@@ -404,13 +595,6 @@
         </div-->
         <!--figcaption class="caption">A short caption for the teaser figure can go here.</figcaption-->
       </figure>
-    </section>
-
-    <section id="abstract" aria-labelledby="abstract-title">
-      <h2 id="abstract-title">Abstract</h2>
-      <p class="abstract">
-        Mobile manipulation requires a robot to navigate to a target object or receptacle and then perform intended manipulation. However, reaching the vicinity of the target does not guarantee a manipulation-ready base pose, a problem known as last-mile navigation. Prior methods for last-mile navigation either rely on manual pose annotation or task-specific training, limiting their scalability to open-vocabulary settings with fine-grained spatial constraints. We propose UniLM-Nav, a unified framework for zero-shot open-vocabulary last-mile navigation. UniLM-Nav decomposes last-mile navigation into view selection, task-conditioned affordance grounding, and geometry-aware base-pose reasoning, all resolved with a shared multimodal large language model (MLLM) backend. Specifically, UniLM-Nav first selects a reference view that best captures the target object or receptacle from recently collected observations. It then grounds task-relevant affordance point in the selected view and lifts the result into the robot-centric coordinate frame. Finally, conditioned on the grounded affordance, task context, and robot geometry, it infers a manipulation-ready base pose for the robot. We evaluate UniLM-Nav on the OVMM benchmark where it outperforms the previous state-of-the-art method, MoTo, by 3.13 percentage points. Analyses show that the components of our method are crucial to final performance, and that the choice of MLLM also has a substantial effect. We further deploy UniLM-Nav on a Unitree B2 quadruped robot with a 6-DoF Unitree Z1 manipulator, validating its applicability to real-world mobile manipulation tasks.
-      </p>
     </section>
 
     <section id="method" aria-labelledby="method-title">
@@ -426,15 +610,18 @@
       </figure>
     </section>
 
-    <!--section id="bibtex" aria-labelledby="bibtex-title">
+    <section id="bibtex" aria-labelledby="bibtex-title">
       <h2 id="bibtex-title">BibTeX</h2>
-      <pre><code>@article{unilmnav2026,
-  title   = {UniLM-Nav: Paper Title Placeholder},
-  author  = {Author One and Author Two and Author Three},
-  journal = {Under Review},
-  year    = {2026}
+      <pre><code>@misc{zhang2026unilmnav,
+      title={UniLM-Nav: A Unified Framework for Zero-Shot Last-Mile Navigation},
+      author={Zhang, Zhuofan and Wang, Tianxu and Zhang, Guoxi and Lin, Yixiong and Wang, Xilin and Xu, Hongming and Li, Qing and Zhu, Song-Chun and Fan, Lifeng},
+      year={2026},
+      eprint={2607.06537},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2607.06537},
 }</code></pre>
-    </section-->
+    </section>
   </main>
 
   <footer>
