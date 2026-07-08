@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;750&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <style>
     :root {
       --bg: #ffffff;
@@ -164,7 +165,7 @@
     h1 {
       max-width: var(--content-width);
       margin: 0 auto 14px;
-      font-size: clamp(28px, 4vw, 42px);
+      font-size: clamp(26px, 3.8vw, 40px);
       line-height: 1.46;
       font-weight: 600;
       letter-spacing: 0;
@@ -176,7 +177,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 0;
     }
 
     .paper-title-row h1 {
@@ -186,10 +187,17 @@
     }
 
     .paper-title-logo {
-      width: 143px;
-      height: 143px;
+      width: 136px;
+      height: 136px;
       object-fit: contain;
       flex: 0 0 auto;
+    }
+
+    .hero-intro {
+      width: 100%;
+      padding: 22px 18px 24px;
+      background: #f7f7f7;
+      border-radius: 18px;
     }
 
     .venue {
@@ -284,6 +292,11 @@
       line-height: 1;
     }
 
+    .resource-icon .fa-brands {
+      font-size: 18px;
+      line-height: 1;
+    }
+
     .tldr {
       margin: 24px auto 0;
       max-width: var(--content-width);
@@ -333,17 +346,11 @@
       aspect-ratio: 16 / 9;
       background: transparent;
       border-radius: 16px;
-      box-shadow: 0 14px 34px rgba(32, 33, 36, 0.14);
       overflow: hidden;
-      transition: box-shadow 220ms ease;
     }
 
     .hero-video {
       margin-top: 26px;
-    }
-
-    .video-embed:hover {
-      box-shadow: 0 18px 42px rgba(32, 33, 36, 0.18);
     }
 
     .video-embed iframe {
@@ -401,12 +408,56 @@
 
     #bibtex h2 {
       text-align: left;
-      font-size: 24px;
+      font-size: 22px;
+    }
+
+    .bibtex-code-block {
+      position: relative;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: background 160ms ease, color 160ms ease;
+    }
+
+    .copy-button:hover {
+      background: rgba(32, 33, 36, 0.08);
+      color: var(--ink);
+    }
+
+    .copy-feedback {
+      position: absolute;
+      top: 16px;
+      right: 50px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 160ms ease;
+    }
+
+    .copy-feedback.is-visible {
+      opacity: 1;
     }
 
     #bibtex pre {
       background: #f6f6f6;
       border: 0;
+      font-size: 12px;
       white-space: pre;
     }
 
@@ -443,8 +494,8 @@
       }
 
       .paper-title-logo {
-        width: 108px;
-        height: 108px;
+        width: 102px;
+        height: 102px;
       }
 
       .venue {
@@ -499,71 +550,66 @@
 
   <main>
     <section class="hero" aria-labelledby="paper-title">
-      <div class="paper-title-row">
-        <img class="paper-title-logo" src="assets/UniLM-Nav_logo.png" alt="UniLM-Nav logo">
-        <h1 id="paper-title">UniLM-Nav:  A Unified Framework for Zero-Shot Last-Mile Navigation</h1>
-      </div>
-      <!--p class="venue">Under Review</p-->
+      <div class="hero-intro">
+        <div class="paper-title-row">
+          <img class="paper-title-logo" src="assets/UniLM-Nav_logo.png" alt="UniLM-Nav logo">
+          <h1 id="paper-title">UniLM-Nav:  A Unified Framework for Zero-Shot Last-Mile Navigation</h1>
+        </div>
+        <!--p class="venue">Under Review</p-->
 
-      <div class="authors publication-authors">
-        <span class="author-block">
-          <a target="_blank" href="https://github.com/zfzhang-thu">Zhuofan Zhang</a><sup>1,2</sup><sup class="author-note">*</sup>,</span>
-        <span class="author-block">
-          <a target="_blank" href="https://github.com/TXWang98">Tianxu Wang</a><sup>2</sup><sup class="author-note">*</sup>,</span>
-        <span class="author-block">
-          <a target="_blank" href="https://guoxizhang.com/">Guoxi Zhang</a><sup>2</sup>,</span>
-        <span class="author-block">
-          <a target="_blank" href="https://github.com/yixionglin068">Yixiong Lin</a><sup>2,3</sup>,</span>
-        <span class="author-block">
-          <a target="_blank" href="https://github.com/wang-xilin">Xilin Wang</a><sup>2</sup>,</span>
-        <span class="author-block">
-          <a target="_blank" href="#">Hongming Xu</a><sup>2</sup>,</span>
-        <span class="author-block">
-          <a target="_blank" href="https://liqing.io/">Qing Li</a><sup>2</sup>,</span>
-        <span class="author-block">
-          <a target="_blank" href="https://zhusongchun.net/">Song-Chun Zhu</a><sup>1,2,4</sup>,</span>
-        <span class="author-block">
-          <a target="_blank" href="https://lifengfan.github.io/">Lifeng Fan</a><sup>2</sup><sup class="author-note">&dagger;</sup>,</span>
-      </div>
+        <div class="authors publication-authors">
+          <span class="author-block">
+            <a target="_blank" href="https://github.com/zfzhang-thu">Zhuofan Zhang</a><sup>1,2</sup><sup class="author-note">*</sup>,</span>
+          <span class="author-block">
+            <a target="_blank" href="https://github.com/TXWang98">Tianxu Wang</a><sup>2</sup><sup class="author-note">*</sup>,</span>
+          <span class="author-block">
+            <a target="_blank" href="https://guoxizhang.com/">Guoxi Zhang</a><sup>2</sup>,</span>
+          <span class="author-block">
+            <a target="_blank" href="https://github.com/yixionglin068">Yixiong Lin</a><sup>2,3</sup>,</span>
+          <span class="author-block">
+            <a target="_blank" href="https://github.com/wang-xilin">Xilin Wang</a><sup>2</sup>,</span>
+          <span class="author-block">
+            <a target="_blank" href="#">Hongming Xu</a><sup>2</sup>,</span>
+          <span class="author-block">
+            <a target="_blank" href="https://liqing.io/">Qing Li</a><sup>2</sup>,</span>
+          <span class="author-block">
+            <a target="_blank" href="https://zhusongchun.net/">Song-Chun Zhu</a><sup>1,2,4</sup>,</span>
+          <span class="author-block">
+            <a target="_blank" href="https://lifengfan.github.io/">Lifeng Fan</a><sup>2</sup><sup class="author-note">&dagger;</sup>,</span>
+        </div>
 
-      <div class="affiliations publication-authors author-notes">
-        <span class="author-block"><sup>*</sup>Equal contribution</span>
-        <span class="author-block"><sup>&dagger;</sup>Corresponding author</span>
-      </div>
+        <div class="affiliations publication-authors author-notes">
+          <span class="author-block"><sup>*</sup>Equal contribution</span>
+          <span class="author-block"><sup>&dagger;</sup>Corresponding author</span>
+        </div>
 
-      <div class="affiliations publication-authors">
-        <span class="author-block"><sup>1</sup>Tsinghua University</span>
-        <span class="author-block"><sup>2</sup>BIGAI</span>
-        <span class="author-block"><sup>3</sup>Harbin Institute of Technology</span>
-        <span class="author-block"><sup>4</sup>Peking University</span>
-      </div>
+        <div class="affiliations publication-authors">
+          <span class="author-block"><sup>1</sup>Tsinghua University</span>
+          <span class="author-block"><sup>2</sup>BIGAI</span>
+          <span class="author-block"><sup>3</sup>Harbin Institute of Technology</span>
+          <span class="author-block"><sup>4</sup>Peking University</span>
+        </div>
 
-      <div class="resource-links" aria-label="Project resources">
-        <a class="resource-button" href="https://arxiv.org/abs/2607.06537" target="_blank" rel="noopener">
-          <span class="resource-icon" aria-hidden="true">
-            <i class="ai ai-arxiv"></i>
-          </span>
-          arXiv
-        </a>
-        <a class="resource-button" href="https://youtu.be/uLALblO5p1k" target="_blank" rel="noopener">
-          <span class="resource-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="9"></circle>
-              <path d="m10 8 6 4-6 4z"></path>
-            </svg>
-          </span>
-          Video
-        </a>
-        <a class="resource-button" href="#" aria-disabled="true">
-          <span class="resource-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="m8 9-4 3 4 3"></path>
-              <path d="m16 9 4 3-4 3"></path>
-              <path d="m14 5-4 14"></path>
-            </svg>
-          </span>
-          Code
-        </a>
+        <div class="resource-links" aria-label="Project resources">
+          <a class="resource-button" href="https://arxiv.org/abs/2607.06537" target="_blank" rel="noopener">
+            <span class="resource-icon" aria-hidden="true">
+              <i class="ai ai-arxiv"></i>
+            </span>
+            arXiv
+          </a>
+          <a class="resource-button" href="https://youtu.be/uLALblO5p1k" target="_blank" rel="noopener">
+            <span class="resource-icon" aria-hidden="true">
+              <i class="fa-brands fa-youtube"></i>
+            </span>
+            Video
+          </a>
+          <a class="resource-button" href="#" aria-disabled="true">
+            <span class="resource-icon" aria-hidden="true">
+              <i class="fa-brands fa-github"></i>
+            </span>
+            Code
+          </a>
+        </div>
       </div>
 
       <p class="tldr">
@@ -612,7 +658,12 @@
 
     <section id="bibtex" aria-labelledby="bibtex-title">
       <h2 id="bibtex-title">BibTeX</h2>
-      <pre><code>@misc{zhang2026unilmnav,
+      <div class="bibtex-code-block">
+        <button class="copy-button" type="button" data-copy-target="bibtex-code" aria-label="Copy BibTeX">
+          <i class="fa-regular fa-copy" aria-hidden="true"></i>
+        </button>
+        <span class="copy-feedback" aria-live="polite">Copied!</span>
+        <pre><code id="bibtex-code">@misc{zhang2026unilmnav,
       title={UniLM-Nav: A Unified Framework for Zero-Shot Last-Mile Navigation},
       author={Zhang, Zhuofan and Wang, Tianxu and Zhang, Guoxi and Lin, Yixiong and Wang, Xilin and Xu, Hongming and Li, Qing and Zhu, Song-Chun and Fan, Lifeng},
       year={2026},
@@ -621,11 +672,46 @@
       primaryClass={cs.RO},
       url={https://arxiv.org/abs/2607.06537},
 }</code></pre>
+      </div>
     </section>
   </main>
 
   <footer>
     Website template inspired by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
   </footer>
+  <script>
+    document.querySelectorAll("[data-copy-target]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.copyTarget);
+        if (!target) return;
+
+        const text = target.textContent.trim();
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+          }
+        } catch (error) {
+          console.error("Failed to copy BibTeX:", error);
+          return;
+        }
+
+        const feedback = button.parentElement.querySelector(".copy-feedback");
+        feedback.classList.add("is-visible");
+        window.setTimeout(() => {
+          feedback.classList.remove("is-visible");
+        }, 1400);
+      });
+    });
+  </script>
 </body>
 </html>
