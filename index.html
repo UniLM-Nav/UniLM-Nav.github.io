@@ -7,7 +7,7 @@
   <title>UniLM-Nav</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;750&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <style>
@@ -23,6 +23,10 @@
       --code-bg: #f5f7fb;
       --max-width: 980px;
       --content-width: 900px;
+      --block-gap: 24px;
+      --font-body: "Merriweather", Georgia, serif;
+      --font-heading: "EB Garamond", Garamond, Georgia, serif;
+      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     }
 
     * {
@@ -33,8 +37,8 @@
       margin: 0;
       background: var(--bg);
       color: var(--ink);
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      line-height: 1.65;
+      font-family: var(--font-body);
+      line-height: 1.5;
     }
 
     a {
@@ -157,7 +161,7 @@
     }
 
     .hero {
-      padding: 46px 0 30px;
+      padding: 46px 0 0;
       text-align: center;
       border-top: 0;
     }
@@ -165,15 +169,16 @@
     h1 {
       max-width: var(--content-width);
       margin: 0 auto 14px;
-      font-size: clamp(26px, 3.8vw, 40px);
-      line-height: 1.46;
-      font-weight: 600;
+      font-family: var(--font-heading);
+      font-size: clamp(30px, 4.2vw, 46px);
+      line-height: 1.3;
+      font-weight: 700;
       letter-spacing: 0;
     }
 
     .paper-title-row {
       max-width: var(--content-width);
-      margin: 0 auto 14px;
+      margin: 0 auto 8px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -191,6 +196,7 @@
       height: 136px;
       object-fit: contain;
       flex: 0 0 auto;
+      margin-right: -10px;
     }
 
     .hero-intro {
@@ -203,8 +209,9 @@
     .venue {
       margin: 0 0 20px;
       color: var(--muted);
+      font-family: var(--font-heading);
       font-size: 22px;
-      font-weight: 650;
+      font-weight: 700;
     }
 
     .authors,
@@ -228,6 +235,15 @@
       margin-right: 4px;
     }
 
+    .authors .author-block {
+      margin-right: 25px;
+      margin-bottom: 2px;
+    }
+
+    .affiliations:not(.author-notes) .author-block {
+      margin-right: 25px;
+    }
+
     .author-note {
       font-size: 0.8em;
       position: relative;
@@ -249,6 +265,7 @@
       background: var(--ink);
       color: #ffffff;
       padding: 9px 16px;
+      font-family: var(--font-body);
       font-weight: 700;
       font-size: 15px;
       display: inline-flex;
@@ -298,37 +315,71 @@
     }
 
     .tldr {
-      margin: 24px auto 0;
+      margin: var(--block-gap) auto 0;
       max-width: var(--content-width);
       padding: 16px 18px;
       border-left: 4px solid var(--accent);
       background: var(--soft);
       text-align: left;
-      font-size: 14px;
+      font-size: 16px;
+      line-height: 1.7;
     }
 
     section {
       width: min(100%, var(--content-width));
       margin: 0 auto;
-      padding: 28px 0;
-      border-top: 1px solid var(--line);
+      padding: 0;
     }
 
     h2 {
       margin: 0 0 16px;
+      font-family: var(--font-heading);
       font-size: 30px;
-      line-height: 1.2;
+      line-height: 1.3;
+      font-weight: 700;
       text-align: center;
       letter-spacing: 0;
     }
 
+    section > h2 {
+      margin-top: var(--block-gap);
+    }
+
+    h2.heading-line {
+      overflow: hidden;
+    }
+
+    h2.heading-line > span {
+      display: inline-block;
+      position: relative;
+    }
+
+    h2.heading-line > span::before,
+    h2.heading-line > span::after {
+      content: "";
+      position: absolute;
+      top: calc(50% - ((0.2px + 0.05em) / 2));
+      width: 2000px;
+      border-bottom: calc(0.2px + 0.05em) solid var(--line);
+    }
+
+    h2.heading-line > span::before {
+      right: 100%;
+      margin-right: calc(5px + 0.3em);
+    }
+
+    h2.heading-line > span::after {
+      left: 100%;
+      margin-left: calc(5px + 0.3em);
+    }
+
     .figure {
-      margin: 0 auto;
+      margin: var(--block-gap) auto 0;
       width: min(100%, var(--content-width));
     }
 
     .abstract-figure {
-      margin-top: 24px;
+      margin-top: var(--block-gap);
     }
 
     .figure img {
@@ -344,13 +395,72 @@
       width: min(100%, var(--content-width));
       margin: 0 auto;
       aspect-ratio: 16 / 9;
-      background: transparent;
+      background: #f7f7f7;
       border-radius: 16px;
       overflow: hidden;
     }
 
     .hero-video {
-      margin-top: 26px;
+      margin-top: var(--block-gap);
+    }
+
+    .video-fallback {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      background: #f7f7f7;
+      transition: opacity 220ms ease, visibility 220ms ease;
+    }
+
+    .video-fallback-thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.72;
+    }
+
+    .video-fallback-overlay {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .video-fallback-play {
+      width: 68px;
+      height: 68px;
+      border-radius: 999px;
+      background: rgba(32, 33, 36, 0.82);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+
+    .video-fallback-status {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .video-fallback-link {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .video-embed.is-ready .video-fallback {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
     .video-embed iframe {
@@ -359,6 +469,12 @@
       width: 100%;
       height: 100%;
       border: 0;
+      opacity: 0;
+      transition: opacity 220ms ease;
+    }
+
+    .video-embed.is-ready iframe {
+      opacity: 1;
     }
 
     .placeholder {
@@ -380,15 +496,77 @@
       text-align: center;
     }
 
-    .abstract {
+    .abstract,
+    .method-text {
       max-width: var(--content-width);
       margin: 0 auto;
       text-align: justify;
-      font-size: 13px;
+      font-size: 16px;
+      line-height: 1.7;
     }
 
     .abstract + .abstract {
       margin-top: 12px;
+    }
+
+    .annotation-green {
+      color: #1e8e3e;
+      font-weight: 700;
+    }
+
+    .annotation-red {
+      color: #d93025;
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      width: min(100%, var(--content-width));
+      margin: var(--block-gap) auto 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .results-table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      min-width: 720px;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .results-table th,
+    .results-table td {
+      padding: 10px 12px;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .results-table th {
+      font-weight: 700;
+    }
+
+    .results-table thead tr {
+      background: #fafafa;
+    }
+
+    .results-table th:first-child,
+    .results-table td:first-child {
+      text-align: left;
+    }
+
+    .results-table thead tr:last-child th {
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .results-table tbody tr {
+      border-top: 1px solid var(--line);
+    }
+
+    .results-table tbody tr.table-highlight {
+      background: #f7f7f7;
     }
 
     pre {
@@ -397,18 +575,16 @@
       overflow-x: auto;
       background: var(--code-bg);
       border: 1px solid var(--line);
+      font-family: var(--font-mono);
       font-size: 14px;
       line-height: 1.45;
       white-space: pre-wrap;
     }
 
-    #bibtex {
-      border-top: 0;
-    }
-
     #bibtex h2 {
-      text-align: left;
       font-size: 22px;
+      text-align: left;
+      margin-top: calc(var(--block-gap) + 20px);
     }
 
     .bibtex-code-block {
@@ -559,23 +735,24 @@
 
         <div class="authors publication-authors">
           <span class="author-block">
-            <a target="_blank" href="https://github.com/zfzhang-thu">Zhuofan Zhang</a><sup>1,2</sup><sup class="author-note">*</sup>,</span>
+            <a target="_blank" href="https://github.com/zfzhang-thu">Zhuofan Zhang</a><sup>1,2</sup><sup class="author-note">*</sup></span>
           <span class="author-block">
-            <a target="_blank" href="https://github.com/TXWang98">Tianxu Wang</a><sup>2</sup><sup class="author-note">*</sup>,</span>
+            <a target="_blank" href="https://github.com/TXWang98">Tianxu Wang</a><sup>2</sup><sup class="author-note">*</sup></span>
           <span class="author-block">
-            <a target="_blank" href="https://guoxizhang.com/">Guoxi Zhang</a><sup>2</sup>,</span>
+            <a target="_blank" href="https://guoxizhang.com/">Guoxi Zhang</a><sup>2</sup></span>
           <span class="author-block">
-            <a target="_blank" href="https://github.com/yixionglin068">Yixiong Lin</a><sup>2,3</sup>,</span>
+            <a target="_blank" href="https://github.com/yixionglin068">Yixiong Lin</a><sup>2,3</sup></span>
           <span class="author-block">
-            <a target="_blank" href="https://github.com/wang-xilin">Xilin Wang</a><sup>2</sup>,</span>
+            <a target="_blank" href="https://github.com/wang-xilin">Xilin Wang</a><sup>2</sup></span>
+          <br>
           <span class="author-block">
-            <a target="_blank" href="https://github.com/sbx126">Hongming Xu</a><sup>2</sup>,</span>
+            <a target="_blank" href="https://github.com/sbx126">Hongming Xu</a><sup>2</sup></span>
           <span class="author-block">
-            <a target="_blank" href="https://liqing.io/">Qing Li</a><sup>2</sup>,</span>
+            <a target="_blank" href="https://liqing.io/">Qing Li</a><sup>2</sup></span>
           <span class="author-block">
-            <a target="_blank" href="https://zhusongchun.net/">Song-Chun Zhu</a><sup>1,2,4</sup>,</span>
+            <a target="_blank" href="https://zhusongchun.net/">Song-Chun Zhu</a><sup>1,2,4</sup></span>
           <span class="author-block">
-            <a target="_blank" href="https://lifengfan.github.io/">Lifeng Fan</a><sup>2</sup><sup class="author-note">&dagger;</sup>,</span>
+            <a target="_blank" href="https://lifengfan.github.io/">Lifeng Fan</a><sup>2</sup><sup class="author-note">&dagger;</sup></span>
         </div>
 
         <div class="affiliations publication-authors author-notes">
@@ -617,17 +794,27 @@
           UniLM-Nav is a zero-shot MLLM framework that bridges object navigation and manipulation by selecting task-relevant views, grounding affordances, and reasoning about manipulation-ready base poses for open-vocabulary mobile manipulation.
       </p>
       <div class="video-embed hero-video" id="video">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/uLALblO5p1k?si=OUpwQTOLTeneCfWX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="video-fallback" id="video-fallback" aria-live="polite">
+          <img class="video-fallback-thumb" src="https://i.ytimg.com/vi/uLALblO5p1k/hqdefault.jpg" alt="">
+          <div class="video-fallback-overlay">
+            <div class="video-fallback-play" aria-hidden="true">
+              <i class="fa-brands fa-youtube"></i>
+            </div>
+            <p class="video-fallback-status" id="video-fallback-status">Loading video...</p>
+            <a class="video-fallback-link" href="https://youtu.be/uLALblO5p1k" target="_blank" rel="noopener">Watch on YouTube</a>
+          </div>
+        </div>
+        <iframe id="hero-video-frame" width="560" height="315" src="https://www.youtube.com/embed/uLALblO5p1k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
       </div>
     </section>
 
     <section id="abstract" aria-labelledby="abstract-title">
-      <h2 id="abstract-title">Abstract</h2>
+      <h2 id="abstract-title" class="heading-line"><span>Abstract</span></h2>
       <p class="abstract">
-        Mobile manipulation requires a robot to navigate to a target object or receptacle and then perform intended manipulation. However, reaching the vicinity of the target does not guarantee a manipulation-ready base pose, a problem known as last-mile navigation. Prior methods for last-mile navigation either rely on manual pose annotation or task-specific training, limiting their scalability to open-vocabulary settings with fine-grained spatial constraints.
+        Mobile manipulation requires a robot to navigate to a target object or receptacle and then perform intended manipulation. However, reaching the vicinity of the target does not guarantee a manipulation-ready base pose, a problem known as <strong>last-mile navigation</strong>. Prior methods for last-mile navigation either rely on manual pose annotation or task-specific training, limiting their scalability to open-vocabulary settings with fine-grained spatial constraints.
       </p>
       <p class="abstract">
-        We propose UniLM-Nav, a unified framework for zero-shot open-vocabulary last-mile navigation. UniLM-Nav decomposes last-mile navigation into view selection, task-conditioned affordance grounding, and geometry-aware base-pose reasoning, all resolved with a shared multimodal large language model (MLLM) backend. Specifically, UniLM-Nav first selects a reference view that best captures the target object or receptacle from recently collected observations. It then grounds task-relevant affordance point in the selected view and lifts the result into the robot-centric coordinate frame. Finally, conditioned on the grounded affordance, task context, and robot geometry, it infers a manipulation-ready base pose for the robot.
+        We propose <strong>UniLM-Nav</strong>, a <strong>uni</strong>fied framework for zero-shot open-vocabulary <strong>l</strong>ast-<strong>m</strong>ile <strong>nav</strong>igation. UniLM-Nav decomposes last-mile navigation into view selection, task-conditioned affordance grounding, and geometry-aware base-pose reasoning, all resolved with a shared multimodal large language model (MLLM) backend. Specifically, UniLM-Nav first selects a reference view that best captures the target object or receptacle from recently collected observations. It then grounds task-relevant affordance point in the selected view and lifts the result into the robot-centric coordinate frame. Finally, conditioned on the grounded affordance, task context, and robot geometry, it infers a manipulation-ready base pose for the robot.
       </p>
       <p class="abstract">
         We evaluate UniLM-Nav on the OVMM benchmark where it outperforms the previous state-of-the-art method, MoTo, by 3.13 percentage points. Analyses show that the components of our method are crucial to final performance, and that the choice of MLLM also has a substantial effect. We further deploy UniLM-Nav on a Unitree B2 quadruped robot with a 6-DoF Unitree Z1 manipulator, validating its applicability to real-world mobile manipulation tasks.
@@ -644,7 +831,10 @@
     </section>
 
     <section id="method" aria-labelledby="method-title">
-      <h2 id="method-title">Method</h2>
+      <h2 id="method-title" class="heading-line"><span>Method</span></h2>
+      <p class="method-text">
+        UniLM-Nav decomposes last-mile navigation into view selection, affordance grounding, and base-pose reasoning. Given a task instruction, the MLLM first selects a suitable view from recent observations, then grounds the task-relevant affordance and lifts it to 3D with depth. Conditioned on the 3D affordance, robot configuration, and task instruction, the MLLM predicts a manipulation-ready base pose for execution.
+      </p>
       <figure class="figure">
         <!-- Put your method image at assets/method.png, or update the src below. -->
         <img src="assets/method_teaser_final.png" alt="UniLM-Nav method overview" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
@@ -653,6 +843,102 @@
           Replace <code>assets/method.png</code> with your method overview figure.
         </div-->
         <!--figcaption class="caption">A concise description of the UniLM-Nav method overview can go here.</figcaption-->
+      </figure>
+    </section>
+
+    <section id="results" aria-labelledby="results-title">
+      <h2 id="results-title" class="heading-line"><span>Results on OVMM-Bench</span></h2>
+
+      <p class="method-text">
+        <strong>(1)</strong> UniLM-Nav achieves the best performance on the OVMM validation set. <strong>(2)</strong> With a lightweight RoboBrain-2.5-4B as its MLLM backend, UniLM-Nav still outperforms most alternative methods.
+      </p>
+
+      <div class="table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Method</th>
+              <th colspan="3">Partial Success Rates</th>
+              <th rowspan="2">Overall<br>SR</th>
+              <th rowspan="2">Average<br>SR</th>
+            </tr>
+            <tr>
+              <th>FindObj (↑)</th>
+              <th>Pick (↑)</th>
+              <th>FindRec (↑)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HomeRobot (RL)</td>
+              <td>66.60%</td>
+              <td>61.10%</td>
+              <td>50.90%</td>
+              <td>14.80%</td>
+              <td>48.30%</td>
+            </tr>
+            <tr>
+              <td>HomeRobot (Heuristic)</td>
+              <td>65.40%</td>
+              <td>54.80%</td>
+              <td>43.70%</td>
+              <td>7.30%</td>
+              <td>42.80%</td>
+            </tr>
+            <tr>
+              <td>MoManipVLA</td>
+              <td>66.10%</td>
+              <td>62.60%</td>
+              <td>53.10%</td>
+              <td>15.80%</td>
+              <td>49.40%</td>
+            </tr>
+            <tr>
+              <td>UniTeam</td>
+              <td>66.13%</td>
+              <td>62.65%</td>
+              <td>54.69%</td>
+              <td>17.96%</td>
+              <td>50.36%</td>
+            </tr>
+            <tr>
+              <td>MoTo</td>
+              <td>66.67%</td>
+              <td>60.95%</td>
+              <td>49.87%</td>
+              <td>20.64%</td>
+              <td>49.53%</td>
+            </tr>
+            <tr class="table-highlight">
+              <td><strong>UniLM-Nav (w/ Gemini-3-Flash-Preview)</strong></td>
+              <td><strong>69.47%</strong></td>
+              <td><strong>66.22%</strong></td>
+              <td>54.55%</td>
+              <td><strong>23.77%</strong></td>
+              <td><strong>53.50%</strong></td>
+            </tr>
+            <tr class="table-highlight">
+              <td><strong>UniLM-Nav (w/ RoboBrain-2.5-4B)</strong></td>
+              <td>68.97%</td>
+              <td>63.05%</td>
+              <td>52.38%</td>
+              <td>19.19%</td>
+              <td>50.90%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="error-analysis" aria-labelledby="error-analysis-title">
+      <h2 id="error-analysis-title" class="heading-line"><span>Error Analysis</span></h2>
+
+      <p class="method-text">
+        <strong>Left:</strong> Error Breakdown. <strong>Right:</strong> Representative last-mile navigation failures involving view selection, affordance grounding, and base-pose reasoning. The <span class="annotation-green">green annotations</span> indicate preferred views, affordance regions, or base poses, while the <span class="annotation-red">red annotations</span> show the corresponding erroneous predictions.
+      </p>
+
+      <figure class="figure">
+        <img src="assets/error_analysis_qual_result_v6_01.png" alt="Qualitative error analysis of UniLM-Nav on the OVMM benchmark">
       </figure>
     </section>
 
@@ -677,7 +963,7 @@
   </main>
 
   <footer>
-    Website template inspired by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+    Website template inspired by <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> and <a href="https://mtu3d.github.io/">MTU3D</a> (<a href="https://github.com/denkiwakame/academic-project-template">Academic Project Page Template</a>).
   </footer>
   <script>
     document.querySelectorAll("[data-copy-target]").forEach((button) => {
@@ -712,6 +998,29 @@
         }, 1400);
       });
     });
+
+    (function () {
+      const videoEmbed = document.getElementById("video");
+      const videoFrame = document.getElementById("hero-video-frame");
+      const fallbackStatus = document.getElementById("video-fallback-status");
+      if (!videoEmbed || !videoFrame) return;
+
+      let isReady = false;
+
+      const markReady = () => {
+        if (isReady) return;
+        isReady = true;
+        videoEmbed.classList.add("is-ready");
+      };
+
+      videoFrame.addEventListener("load", markReady);
+
+      window.setTimeout(() => {
+        if (!isReady && fallbackStatus) {
+          fallbackStatus.textContent = "Video is still loading. You can also watch on YouTube below.";
+        }
+      }, 12000);
+    })();
   </script>
 </body>
 </html>
